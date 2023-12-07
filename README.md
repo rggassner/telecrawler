@@ -6,6 +6,7 @@ Try not to push the limits too much, or telegram will block your user for a litt
 Features and change requests are welcome.
 
 Future work:
+* Improve random word generator to allow multiple terms in a single search.
 * Extract links while crawling, and store them in a separate table.
 * Include date when message was sent and the date it was crawled.
 * Improve exception/error handling.
