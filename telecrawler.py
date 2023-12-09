@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-#pip install cryptg - recommended for improved performance
+#pip install cryptg - recommended for better performance
 import configparser
 import sqlite3
 import time
@@ -140,10 +140,16 @@ def evaluate_message(message,chatid,client):
 
 def evaluate_chat(chat,client):
     username=''
+    is_broadcast=True
     try:
         username=chat.username
     except AttributeError:
         username=''
+
+    try:
+        is_broadcast=chat.broadcast
+    except AttributeError:
+        is_broadcast=True
 
     print('Evaluating chat {} {}'.format(chat.title,username))
     if not chat_exists(chat.id):
@@ -154,7 +160,7 @@ def evaluate_chat(chat,client):
     sentences=[str(chat.title),str(username)]
     for sentence in sentences:
         insert_words(sentence)
-    if not chat.broadcast:
+    if not is_broadcast:
         print('Inserting users')
         user_list = client.get_participants(entity=chat,aggressive=True)
         for user in user_list:
